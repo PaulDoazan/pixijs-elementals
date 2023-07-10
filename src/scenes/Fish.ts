@@ -14,9 +14,9 @@ export class Fish extends Container {
         this.direction = direction;
         this.speed = speed;
         this.turnSpeed = turnSpeed;
-        let random = Math.random() * 0.2
+        let random = Math.random() * 0.15
         this.scale._x = 0.4 + random;
-        this.scale._y = thinner ? 0.15 : 0.4
+        this.scale._y = thinner ? 0.2 : 0.4
         this.scale._y += random
         fishSprite.anchor.set(0.5);
 
