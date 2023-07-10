@@ -8,8 +8,12 @@ export const manifest: ResolverManifest = {
             {
                 "Adele Fish 0": "./adeleFish_0.png",
                 "Adele Fish 1": "./adeleFish_1.png",
+                "Adele Fish 2": "./adeleFish_2.png",
+                "Adele Fish 3": "./adeleFish_3.png",
                 "Sand": "./sandBeach.jpg",
-                "Water": "./waterTexture.png",
+                "Bottom": "./dark-bottom.jpg",
+                "Water": "./waves.png",
+                "displacement_map_repeat": "./displacementMap.jpg",
             }
         },
         // {

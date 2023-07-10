@@ -4,7 +4,7 @@ export class Manager {
     private constructor() { /*this class is purely static. No constructor to see here*/ }
 
     // Safely store variables for our game
-    private static app: Application;
+    public static app: Application;
     private static currentScene: IScene;
 
     // With getters but not setters, these variables become read-only
@@ -27,6 +27,7 @@ export class Manager {
         });
 
         Manager.app.ticker.add(Manager.update)
+        Manager.app.stage.interactive = true;
 
         // listen for the browser telling us that the screen size changed
         window.addEventListener("resize", Manager.resize);

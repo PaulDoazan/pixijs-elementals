@@ -2,30 +2,31 @@ import { Container } from "pixi.js";
 import { IScene, Manager } from "../Manager";
 import { Fish } from "./Fish";
 import { Layer } from "./Layer";
+import { Water } from "./Water";
 
 export class GameScene extends Container implements IScene {
     private fishes: Array<Fish>;
     private layer1: Layer;
-    private layer2: Layer;
+    private water: Water;
 
     constructor() {
         super();
 
         this.fishes = [];
-        this.layer1 = new Layer('Sand', 0.3);
-        this.layer2 = new Layer('Water', 0.3);
-        this.layer2.alpha = 0.4
+        this.layer1 = new Layer('Bottom');
+
         this.addChild(this.layer1);
 
         for (let i = 0; i < 30; i++) {
-            const fish = new Fish(`Adele Fish ${i % 2}`, Math.random() * Math.PI * 2, 1, 0.2);
-            fish.x = Math.random() * Manager.width;
-            fish.y = Math.random() * Manager.height;
+            const fish = new Fish(`Adele Fish ${i % 4}`, Math.random() * Math.PI * 2, 2, 0.2, (i % 4) < 3);
+            fish.x = Math.random() * (Manager.width + fish.getOffset());
+            fish.y = Math.random() * (Manager.height + fish.getOffset());
             this.fishes.push(fish);
             this.addChild(fish);
         }
 
-        this.addChild(this.layer2);
+        this.water = new Water();
+        this.addChild(this.water);
     }
 
     public update(): void {
@@ -34,6 +35,7 @@ export class GameScene extends Container implements IScene {
             const fish = this.fishes[i];
             fish.update();
         }
+        this.water.update()
     }
 
     public resize(): void {
