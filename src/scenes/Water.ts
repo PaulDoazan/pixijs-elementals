@@ -31,8 +31,8 @@ export class Water extends Container {
         // Make sure the sprite is wrapping.
         this.displacementSprite.texture.baseTexture.wrapMode = WRAP_MODES.REPEAT;
         this.displacementFilter = new DisplacementFilter(this.displacementSprite);
-        this.displacementFilter.scale.x = 20;
-        this.displacementFilter.scale.y = 20;
+        this.displacementFilter.scale.x = 50;
+        this.displacementFilter.scale.y = 50;
 
         this.shockWaveFilters = []
         this.setUpShockWave()
@@ -49,7 +49,7 @@ export class Water extends Container {
     }
 
     private setUpShockWave() {
-        Manager.app.stage.addEventListener('mousedown', (e) => {
+        Manager.app.stage.addEventListener('pointerdown', (e) => {
             if (this.shockWaveFilters.length > 2) return
             const shockWaveFilter = new ShockwaveFilter();
             this.shockWaveFilters.push(shockWaveFilter)
@@ -65,7 +65,7 @@ export class Water extends Container {
     }
 
     public update(): void {
-        const speed = 0.6;
+        const speed = 0.8;
         this.waterArr.forEach(water => {
             water.y -= speed
 
@@ -73,8 +73,8 @@ export class Water extends Container {
                 water.y = water.height * 2
             }
         })
-        this.displacementSprite.x += 0.9;
-        this.displacementSprite.y += 0.9;
+        this.displacementSprite.x += 1;
+        this.displacementSprite.y += 1;
         // Reset x & y to 0 when x > width to keep values from going to very huge numbers.
         if (this.displacementSprite.x > this.displacementSprite.width) {
             this.displacementSprite.x = 0;
