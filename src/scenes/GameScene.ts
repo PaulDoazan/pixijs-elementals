@@ -27,6 +27,7 @@ export class GameScene extends Container implements IScene {
 
         this.water = new Water();
         this.addChild(this.water);
+        this.resize()
     }
 
     public update(): void {
@@ -39,6 +40,13 @@ export class GameScene extends Container implements IScene {
     }
 
     public resize(): void {
+        let scale;
 
+        if (Manager.width / Manager.height > this.layer1.__width / this.layer1.__height) {
+            scale = Manager.width / this.layer1.__width
+        } else {
+            scale = Manager.height / this.layer1.__height
+        }
+        this.layer1.scale.set(scale)
     }
 }
