@@ -43,7 +43,7 @@ export class Water extends Container {
         Manager.app.stage.addChild(this.displacementSprite)
 
         this.container.rotation = -0.5
-        this.container.x -= Manager.width / 3.5
+        this.container.x -= water1.width / 2
         this.waterArr.push(water1, water2, water3, water4, water5, water6)
         this.addChild(this.container);
     }
