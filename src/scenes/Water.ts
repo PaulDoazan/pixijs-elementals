@@ -50,7 +50,7 @@ export class Water extends Container {
 
     private setUpShockWave() {
         Manager.app.stage.addEventListener('pointerdown', (e) => {
-            if (this.shockWaveFilters.length > 2) return
+            if (this.shockWaveFilters.length > 10) return
             const shockWaveFilter = new ShockwaveFilter();
             this.shockWaveFilters.push(shockWaveFilter)
             Manager.app.stage.filters = [this.displacementFilter, ...this.shockWaveFilters]
