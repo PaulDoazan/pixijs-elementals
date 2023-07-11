@@ -46,6 +46,7 @@ export class Water extends Container {
         this.container.x -= water1.width / 2
         this.waterArr.push(water1, water2, water3, water4, water5, water6)
         this.addChild(this.container);
+        this.container.interactive = true
     }
 
     private setUpShockWave() {
@@ -61,8 +62,21 @@ export class Water extends Container {
 
             shockWaveFilter.center = [e.data.globalX, e.data.globalY]
             shockWaveFilter.time = 0
+
+            // Manager.app.currentScene.fishes.forEach(el => {
+            //     if (el)
+            //         if (this.distanceBetweenTwoPoints(e.data.globalX, e.data.globalY, el.x, el.y) < 100) {
+            //             console.log(el.getValue())
+            //         }
+            // })
+
         })
     }
+
+    // private distanceBetweenTwoPoints(x1: number, y1: number, x2: number, y2: number) {
+    //     return Math.hypot(x2 - x1, y2 - y1);
+    // }
+
 
     public update(): void {
         const speed = 0.8;

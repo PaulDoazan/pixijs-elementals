@@ -14,10 +14,9 @@ export class GameScene extends Container implements IScene {
 
         this.fishes = [];
         this.layer1 = new Layer('Bottom');
-
         this.addChild(this.layer1);
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 4; i++) {
             const fish = new Fish(`Adele Fish ${i % 4}`, Math.random() * Math.PI * 2, 2, 0.2, (i % 4) < 3);
             fish.x = Math.random() * (Manager.width + fish.getOffset());
             fish.y = Math.random() * (Manager.height + fish.getOffset());
@@ -27,6 +26,7 @@ export class GameScene extends Container implements IScene {
 
         this.water = new Water();
         this.addChild(this.water);
+
         this.resize()
     }
 

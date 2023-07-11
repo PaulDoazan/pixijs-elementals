@@ -1,13 +1,15 @@
 import { Container, Sprite, SpriteSource } from "pixi.js";
 import { Manager } from "../Manager";
+// import { Water } from "./Water";
 
 export class Fish extends Container {
     private direction: number;
     private speed: number;
     private turnSpeed: number;
     private offset: number;
+    private value: number;
 
-    constructor(filePath: SpriteSource, direction: number, speed: number, turnSpeed: number, thinner: boolean = false) {
+    constructor(filePath: SpriteSource, direction: number, speed: number, turnSpeed: number, thinner: boolean = false, value: number = 0) {
         super();
         const fishSprite = Sprite.from(filePath);
 
@@ -18,14 +20,21 @@ export class Fish extends Container {
         this.scale._x = 0.4 + random;
         this.scale._y = thinner ? 0.2 : 0.4
         this.scale._y += random
+        this.value = value;
         fishSprite.anchor.set(0.5);
 
         this.offset = fishSprite.width;
         this.addChild(fishSprite);
+
+        this.interactive = true
     }
 
     public getOffset(): number {
         return this.offset
+    }
+
+    public getValue(): number {
+        return this.value
     }
 
     public update(): void {
