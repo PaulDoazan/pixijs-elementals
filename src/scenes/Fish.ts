@@ -1,4 +1,4 @@
-import { Container, Sprite, SpriteSource } from "pixi.js";
+import { BitmapFont, BitmapText, Container, Sprite, SpriteSource } from "pixi.js";
 import { Manager } from "../Manager";
 // import { Water } from "./Water";
 
@@ -8,6 +8,7 @@ export class Fish extends Container {
     private turnSpeed: number;
     private offset: { x: number, y: number };
     private value: number;
+    private bitmapTexty: BitmapText
 
     constructor(filePath: SpriteSource, direction: number, speed: number, turnSpeed: number, thinner: boolean = false, value: number = 0) {
         super();
@@ -24,9 +25,21 @@ export class Fish extends Container {
         fishSprite.anchor.set(0.5);
 
         this.offset = { x: fishSprite.width * this.scale._x, y: fishSprite.height * this.scale._y };
-        console.log(this.offset);
 
-        this.addChild(fishSprite);
+        BitmapFont.from("comic", {
+            fill: "#ffffff", // White, will be colored later
+            fontFamily: "Comic Sans MS",
+            fontSize: 128
+        })
+
+        // Remember, this font only has letters and numbers. No commas or any other symbol.
+        this.bitmapTexty = new BitmapText(value.toString(),
+            {
+                fontName: "comic",
+                fontSize: 128,
+            });
+        this.bitmapTexty.x = -this.offset.x
+        this.addChild(fishSprite, this.bitmapTexty);
 
         this.interactive = true
     }
@@ -45,6 +58,7 @@ export class Fish extends Container {
         this.y += Math.cos(this.direction) * this.speed;
 
         this.rotation = -this.direction + Math.PI / 2;
+        this.bitmapTexty.rotation = this.direction - Math.PI / 2
 
         // wrap the fish around as the crawl
         let gapX = this.offset.x
@@ -60,17 +74,5 @@ export class Fish extends Container {
         } else if (this.y > (Manager.height + gapY)) {
             this.y = -gapY;
         }
-
-        // if (this.x < -this.offset) {
-        //     this.x += (Manager.width + this.offset * 2);
-        // } else if (this.x > + Manager.width + this.offset) {
-        //     this.x -= (Manager.width + this.offset * 2);
-        // }
-
-        // if (this.y < -this.offset) {
-        //     this.y += (Manager.height + this.offset * 2);
-        // } else if (this.y > Manager.height + this.offset) {
-        //     this.y -= (Manager.height + this.offset * 2);
-        // }
     }
 }

@@ -65,14 +65,22 @@ export class Water extends Container {
             shockWaveFilter.center = [e.data.globalX, e.data.globalY]
             shockWaveFilter.time = 0
 
+            let targets: { dist: number, fish: Fish }[] = []
             this.parent.children.forEach(el => {
-                if (el instanceof Fish)
-                    if (this.distanceBetweenTwoPoints(e.data.globalX, e.data.globalY, el.x, el.y) < 100) {
-                        let nb = new FishNumber(el)
-                        // let nb = new BitmapText(el.getValue().toString())
-                        Manager.app.stage.addChild(nb)
+                if (el instanceof Fish) {
+                    let dist = this.distanceBetweenTwoPoints(e.data.globalX, e.data.globalY, el.x, el.y)
+                    if (dist < 100) {
+                        targets.push({ dist: dist, fish: el })
+
                     }
+                }
             })
+
+            if (targets.length === 0) return;
+            targets.sort((a, b) => a.dist - b.dist)
+
+            let nb = new FishNumber(targets[0].fish)
+            Manager.app.stage.addChild(nb)
 
         })
     }
