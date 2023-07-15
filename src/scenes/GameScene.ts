@@ -8,18 +8,21 @@ export class GameScene extends Container implements IScene {
     private fishes: Array<Fish>;
     private layer1: Layer;
     private water: Water;
+    public mainContainer: Container
 
     constructor() {
         super();
 
         this.fishes = [];
         this.layer1 = new Layer('Bottom');
-        this.addChild(this.layer1);
+        this.mainContainer = new Container()
+        this.mainContainer.addChild(this.layer1);
+        this.addChild(this.mainContainer);
 
         for (let i = 0; i < 4; i++) {
-            const fish = new Fish(`Adele Fish ${i % 4}`, Math.random() * Math.PI * 2, 2, 0.2, (i % 4) < 3);
-            fish.x = Math.random() * (Manager.width + fish.getOffset());
-            fish.y = Math.random() * (Manager.height + fish.getOffset());
+            const fish = new Fish(`Adele Fish ${i % 4}`, Math.random() * Math.PI * 2, 2, 0.2, (i % 4) < 3, i);
+            fish.x = Math.random() * (Manager.width);
+            fish.y = Math.random() * (Manager.height);
             this.fishes.push(fish);
             this.addChild(fish);
         }

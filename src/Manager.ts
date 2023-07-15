@@ -5,7 +5,7 @@ export class Manager {
 
     // Safely store variables for our game
     public static app: Application;
-    private static currentScene: IScene;
+    public static currentScene: IScene;
 
     // With getters but not setters, these variables become read-only
     public static get width(): number {

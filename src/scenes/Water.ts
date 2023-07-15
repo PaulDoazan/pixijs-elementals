@@ -2,6 +2,8 @@ import { Container, DisplacementFilter, Sprite, WRAP_MODES } from "pixi.js";
 import { ShockwaveFilter } from 'pixi-filters';
 import { Layer } from "./Layer";
 import { Manager } from "../Manager";
+import { Fish } from "./Fish";
+import { FishNumber } from "./FishNumber";
 
 export class Water extends Container {
     private container: Container
@@ -63,19 +65,21 @@ export class Water extends Container {
             shockWaveFilter.center = [e.data.globalX, e.data.globalY]
             shockWaveFilter.time = 0
 
-            // Manager.app.currentScene.fishes.forEach(el => {
-            //     if (el)
-            //         if (this.distanceBetweenTwoPoints(e.data.globalX, e.data.globalY, el.x, el.y) < 100) {
-            //             console.log(el.getValue())
-            //         }
-            // })
+            this.parent.children.forEach(el => {
+                if (el instanceof Fish)
+                    if (this.distanceBetweenTwoPoints(e.data.globalX, e.data.globalY, el.x, el.y) < 100) {
+                        let nb = new FishNumber(el)
+                        // let nb = new BitmapText(el.getValue().toString())
+                        Manager.app.stage.addChild(nb)
+                    }
+            })
 
         })
     }
 
-    // private distanceBetweenTwoPoints(x1: number, y1: number, x2: number, y2: number) {
-    //     return Math.hypot(x2 - x1, y2 - y1);
-    // }
+    private distanceBetweenTwoPoints(x1: number, y1: number, x2: number, y2: number) {
+        return Math.hypot(x2 - x1, y2 - y1);
+    }
 
 
     public update(): void {
