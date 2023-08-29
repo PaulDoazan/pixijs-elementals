@@ -1,4 +1,4 @@
-import { BitmapFont, BitmapText, Container, Sprite, SpriteSource } from "pixi.js";
+import { BitmapFont, BitmapText, Container, Graphics, Sprite, SpriteSource } from "pixi.js";
 import { Manager } from "../Manager";
 // import { Water } from "./Water";
 
@@ -27,19 +27,27 @@ export class Fish extends Container {
         this.offset = { x: fishSprite.width * this.scale._x, y: fishSprite.height * this.scale._y };
 
         BitmapFont.from("comic", {
-            fill: "#ffffff", // White, will be colored later
+            fill: "#000000", // White, will be colored later
             fontFamily: "Comic Sans MS",
             fontSize: 128
         })
 
-        // Remember, this font only has letters and numbers. No commas or any other symbol.
         this.bitmapTexty = new BitmapText(value.toString(),
             {
                 fontName: "comic",
                 fontSize: 128,
             });
         this.bitmapTexty.x = -this.offset.x
-        this.addChild(fishSprite, this.bitmapTexty);
+
+        const graphy: Graphics = new Graphics();
+
+        // we give instructions in order. begin fill, line style, draw circle, end filling
+        graphy.beginFill(0xffffff);
+        graphy.lineStyle(10, 0x000000);
+        graphy.drawRect(0, 0, 30, 30); // See how I set the drawing at 0,0? NOT AT 100, 100!
+        graphy.endFill();
+
+        this.addChild(fishSprite, graphy, this.bitmapTexty);
 
         this.interactive = true
     }
