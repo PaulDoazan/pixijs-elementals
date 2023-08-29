@@ -33,10 +33,14 @@ export class Sign {
     }
 
     public refresh() {
+
         this.result = this.getRandomIntInclusive(0, 9)
         this.contentA = this.getRandomIntInclusive(0, this.result)
         this.contentB = this.result - this.contentA
-        if (this.htmlTagSign) this.htmlTagSign.textContent = `${this.contentA} + ${this.contentB} = ?`
+        if (this.htmlTagSign) {
+            this.htmlTagSign.style.display = 'block'
+            this.htmlTagSign.textContent = `${this.contentA} + ${this.contentB} = ?`
+        }
     }
 
     private getRandomIntInclusive(min: number, max: number) {
