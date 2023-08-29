@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'shortStack';
+    src: url('short-stack-v15-latin-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+#sign-content {
+    text-align: center;
+    font-size: 4vw;
+    font-family: 'shortStack';
+    padding: 1vw;
+    border-radius: 10px;
+    border: 5px solid rgba(5, 4, 62, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
+    position:absolute;
+    right: 0;
+    transform: translate(-40%, 20%);
+}
+
+@media (max-aspect-ratio: 1/1) {
+    #sign-content {
+        font-size: 4.5vh;
+        font-family: 'shortStack';
+        padding: 1vh;
+        position: absolute;
+        left: 50%;
+        right: auto;
+        bottom: 0;
+        transform: translate(-50%, -30%);
+    }
+  }

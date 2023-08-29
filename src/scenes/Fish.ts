@@ -8,7 +8,7 @@ export class Fish extends Container {
     private turnSpeed: number;
     private offset: { x: number, y: number };
     private value: number;
-    private bitmapTexty: BitmapText
+    public bitmapTexty: BitmapText
 
     constructor(filePath: SpriteSource, direction: number, speed: number, turnSpeed: number, thinner: boolean = false, value: number = 0) {
         super();
@@ -27,8 +27,8 @@ export class Fish extends Container {
         this.offset = { x: fishSprite.width * this.scale._x, y: fishSprite.height * this.scale._y };
 
         BitmapFont.from("comic", {
-            fill: "#000000", // White, will be colored later
-            fontFamily: "Comic Sans MS",
+            fill: "#000000",
+            fontFamily: "shortStack",
             fontSize: 128
         })
 
@@ -37,14 +37,18 @@ export class Fish extends Container {
                 fontName: "comic",
                 fontSize: 128,
             });
-        this.bitmapTexty.x = -this.offset.x
+        this.bitmapTexty.anchor.set(0.5);
+        this.bitmapTexty.x = -fishSprite.width / 1.5
+        this.bitmapTexty.y = -25
 
         const graphy: Graphics = new Graphics();
 
         // we give instructions in order. begin fill, line style, draw circle, end filling
         graphy.beginFill(0xffffff);
-        graphy.lineStyle(10, 0x000000);
-        graphy.drawRect(0, 0, 30, 30); // See how I set the drawing at 0,0? NOT AT 100, 100!
+        graphy.lineStyle(5, 0x000000);
+        graphy.moveTo(200 - fishSprite.width / 1.5, 0)
+        graphy.lineTo(75 - fishSprite.width / 1.5, 0)
+        graphy.drawRect(-75 - fishSprite.width / 1.5, -75, 150, 150);
         graphy.endFill();
 
         this.addChild(fishSprite, graphy, this.bitmapTexty);
@@ -66,7 +70,7 @@ export class Fish extends Container {
         this.y += Math.cos(this.direction) * this.speed;
 
         this.rotation = -this.direction + Math.PI / 2;
-        this.bitmapTexty.rotation = this.direction - Math.PI / 2
+        //this.bitmapTexty.rotation = this.direction - Math.PI / 2
 
         // wrap the fish around as the crawl
         let gapX = this.offset.x

@@ -4,6 +4,7 @@ import { Layer } from "./Layer";
 import { Manager } from "../Manager";
 import { Fish } from "./Fish";
 import { FishNumber } from "./FishNumber";
+import { Sign } from "./Sign";
 
 export class Water extends Container {
     private container: Container
@@ -11,6 +12,7 @@ export class Water extends Container {
     private displacementSprite: Sprite
     private shockWaveFilters: ShockwaveFilter[]
     private displacementFilter: any
+    private sign: Sign
 
     constructor() {
         super();
@@ -49,6 +51,8 @@ export class Water extends Container {
         this.waterArr.push(water1, water2, water3, water4, water5, water6)
         this.addChild(this.container);
         this.container.interactive = true
+
+        this.sign = new Sign()
     }
 
     private setUpShockWave() {
@@ -80,8 +84,20 @@ export class Water extends Container {
             targets.sort((a, b) => a.dist - b.dist)
 
             let nb = new FishNumber(targets[0].fish)
+            targets[0].fish.bitmapTexty.alpha = 0
+            // let nb = new Container()
             Manager.app.stage.addChild(nb)
 
+            const result = this.sign.check(targets[0].fish.getValue())
+            if (result) {
+                setTimeout(() => {
+                    this.parent.children.forEach(el => {
+                        if (el instanceof Fish) {
+                            el.bitmapTexty.alpha = 1
+                        }
+                    })
+                }, 2000)
+            }
         })
     }
 

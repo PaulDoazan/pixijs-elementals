@@ -1,5 +1,6 @@
 import { Manager } from './Manager';
 import { LoaderScene } from './scenes/LoaderScene';
+import "../assets/style.css"
 
 Manager.initialize(0x6495ed);
 
