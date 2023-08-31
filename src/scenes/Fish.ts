@@ -26,7 +26,7 @@ export class Fish extends Container {
 
         this.offset = { x: fishSprite.width * this.scale._x, y: fishSprite.height * this.scale._y };
 
-        BitmapFont.from("comic", {
+        BitmapFont.from("shortStack", {
             fill: "#000000",
             fontFamily: "shortStack",
             fontSize: 128
@@ -34,7 +34,7 @@ export class Fish extends Container {
 
         this.bitmapTexty = new BitmapText(value.toString(),
             {
-                fontName: "comic",
+                fontName: "shortStack",
                 fontSize: 128,
             });
         this.bitmapTexty.anchor.set(0.5);

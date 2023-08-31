@@ -14,7 +14,7 @@ export class FishNumber extends Container {
         // Remember, this font only has letters and numbers. No commas or any other symbol.
         const bitmapTexty: BitmapText = new BitmapText(fish.getValue().toString(),
             {
-                fontName: "comic",
+                fontName: "shortStack",
                 fontSize: 32, // Making it too big or too small will look bad
                 tint: 0xffffff,
             });
